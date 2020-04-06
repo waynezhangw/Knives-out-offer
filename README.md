@@ -1,2 +1,2 @@
 # Knives-out-offer
-Some algorithm questions from a Chinese book
+Some algorithm questions and codes from a Chinese book
