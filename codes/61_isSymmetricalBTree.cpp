@@ -104,8 +104,18 @@ class Solution {
                 seeRootLR(root->left, vec, LR);
             }
         } else {
-            vec.push_back(NULL);
+            vec.push_back(9998); //means null
         }
+    }
+
+    bool isSymmetrical2(TreeNode* pRoot) {  // after reference knives book code      
+        return seeTwo(pRoot, pRoot);
+    }
+    bool seeTwo(TreeNode* root1, TreeNode* root2) {
+        if (root1 == NULL && root2 == NULL) return true;
+        if (root1 == NULL || root2 == NULL) return false;
+        if (root1->val != root2->val) return false;
+        return seeTwo(root1->left, root2->right) && seeTwo(root1->right, root2->left);
     }
 
    private:
