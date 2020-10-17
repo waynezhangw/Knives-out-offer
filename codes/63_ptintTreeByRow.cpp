@@ -79,7 +79,7 @@ class Solution {
         seeTree(root);
         cout << endl;
         cout << "row by row display: " << endl;
-        vector<vector<int>> vec = Print(root);
+        vector<vector<int>> vec = Print2(root);
         cout << "the vec is:" << endl;
         seeVec(vec);
     }
@@ -127,6 +127,37 @@ class Solution {
         }
         return vec;
     }
+
+    vector<vector<int>> Print2(TreeNode* pRoot) {  // reference knives code, one queue
+        vector<vector<int>> vec;
+        if (pRoot == NULL) return vec;
+        queue<TreeNode*> nodeQu;
+        nodeQu.push(pRoot);
+        int currentLeftNodeNum = 1;
+        int nextLineNodeNum = 0;
+        vector<int> temp;
+        vec.push_back(temp);
+        while (!nodeQu.empty()) {
+            vec[vec.size()-1].push_back(nodeQu.front()->val);
+            if (nodeQu.front()->left != NULL) {
+                nodeQu.push(nodeQu.front()->left);
+                nextLineNodeNum++;
+            }
+            if (nodeQu.front()->right != NULL) {
+                nodeQu.push(nodeQu.front()->right);
+                nextLineNodeNum++;
+            }
+            nodeQu.pop();
+            currentLeftNodeNum--;
+            if (currentLeftNodeNum == 0) {
+                currentLeftNodeNum = nextLineNodeNum;
+                nextLineNodeNum = 0;
+                if (currentLeftNodeNum != 0) vec.push_back(temp);
+            }
+        }
+        return vec;
+    }
+
 
    private:
     TreeNode* root;
